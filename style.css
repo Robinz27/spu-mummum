@@ -1,0 +1,38 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 400px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    margin: 0 auto;
+    background: #cf8f4f;
+    border-radius: 40px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.text-login {
+    font-weight: 600;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+* {
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+}
