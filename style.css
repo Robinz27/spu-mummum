@@ -153,7 +153,7 @@ body {
     background: #cf8f4f;
     height: 160px;
     border-radius: 0 0 60px 60px;
-    padding: 25px 20px;
+    padding: 25px 40px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -164,7 +164,7 @@ body {
 }
 
 .dashboard-text h2 {
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 4px;
 }
 
@@ -173,9 +173,29 @@ body {
     opacity: 0.95;
 }
 
+.dashboard-avatar {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+
 .dashboard-avatar img {
     width: 70px;
     height: 70px;
+    position: relative;
+    z-index: 2;
+}
+
+.avatar-circle {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 /* เมนูปุ่ม 2 ช่อง */
@@ -193,6 +213,13 @@ body {
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+
+.menu-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .menu-card i {
