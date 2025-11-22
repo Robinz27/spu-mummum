@@ -3,6 +3,7 @@ session_start();
 include "db.php";
 
 $email = $_POST['email'];
+$username = $_POST['username'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 // เช็ค email ซ้ำ
@@ -13,7 +14,7 @@ if (mysqli_num_rows($check) > 0) {
 }
 
 // บันทึกข้อมูล
-$sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+$sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
 if (mysqli_query($conn, $sql)) {
 
     $id = mysqli_insert_id($conn);
@@ -21,7 +22,8 @@ if (mysqli_query($conn, $sql)) {
     // เก็บ session
     $_SESSION['user'] = [
         "id" => $id,
-        "email" => $email
+        "email" => $email,
+        "username" => $username
     ];
 
     header("Location: ../dashboard.php");

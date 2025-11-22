@@ -24,7 +24,7 @@ $user = $_SESSION['user'];
 <body>
     <div class="dashboard-header">
         <div class="dashboard-text">
-            <h2>สวัสดี <?php echo $user['email']; ?></h2>
+            <h2>สวัสดี <?php echo $user['username']; ?></h2>
             <p>เมนูแนะนำวันนี้! ></p>
         </div>
 

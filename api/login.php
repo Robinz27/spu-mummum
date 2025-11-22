@@ -17,7 +17,8 @@ if (mysqli_num_rows($query) == 1) {
         // เก็บข้อมูลลง session
         $_SESSION['user'] = [
             "id" => $user['id'],
-            "email" => $user['email']
+            "email" => $user['email'],
+            "username" => $user['username']
         ];
 
         header("Location: ../dashboard.php");
