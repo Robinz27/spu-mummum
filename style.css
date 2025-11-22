@@ -1,3 +1,4 @@
+/* ---------- RESET ---------- */
 * {
     margin: 0;
     padding: 0;
@@ -5,9 +6,84 @@
     font-family: "Kanit", sans-serif;
 }
 
-/* พื้นหลังหลัก */
+/* ---------- BACKGROUND ---------- */
 body {
     background: #ffffff;
+    padding-bottom: 40px;
+}
+
+/* ---------- CONTAINER ---------- */
+.food-list {
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+/* ---------- EACH FOOD CARD ---------- */
+.food-card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+}
+
+/* ---------- IMAGE ---------- */
+.food-card img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-right: 15px;
+}
+
+/* ---------- TEXT AREA ---------- */
+.food-info {
+    flex: 1;
+}
+
+.food-name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.food-type {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+/* ---------- RATING ---------- */
+.rating {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.rating i {
+    margin-right: 4px;
+    font-size: 18px;
+    color: #ffcc33;
+}
+
+/* ---------- MORE INFO BUTTON ---------- */
+.more-btn {
+    background: #cf8f4f;
+    color: #ffffff;
+    padding: 8px 20px;
+    font-size: 15px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.more-btn:hover {
+    transform: scale(1.05);
+    background: #d89c5b;
 }
 
 /* จัดให้อยู่กลาง */
@@ -141,6 +217,7 @@ body {
     cursor: pointer;
     font-weight: 500;
     transition: 0.3s;
+    margin-bottom: 20px;
 }
 
 .btn-login:hover {
@@ -161,6 +238,10 @@ body {
 
 .dashboard-text {
     color: #fff;
+}
+
+.dashboard-p {
+    color: #cf8f4f;
 }
 
 .dashboard-text h2 {
@@ -239,4 +320,77 @@ body {
     height: 300px;
     border-radius: 25px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+/* LIST WRAPPER */
+.food-list {
+    padding: 20px 20px;
+    margin-top: -30px;
+}
+
+/* EACH RESTAURANT CARD */
+.food-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 30px;
+    padding: 15px;
+    margin-bottom: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.food-card img {
+    width: 120px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* TEXT BLOCK */
+.food-info {
+    flex: 1;
+}
+
+/* NAME */
+.food-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #bf7437;
+    margin-bottom: 5px;
+}
+
+/* TYPE */
+.food-type {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* RATING */
+.rating i {
+    color: #ffcc33;
+    margin-right: 3px;
+}
+
+/* BUTTON */
+.more-btn {
+    background: #cf8f4f;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 8px;
+    transition: 0.25s;
+}
+
+.more-btn:hover {
+    background: #d89c5b;
+    transform: scale(1.05);
 }

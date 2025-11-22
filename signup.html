@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPU MUM-MUM - Login</title>
+    <title>SPU MUM-MUM - Sign up</title>
 
     <link rel="icon" type="image/x-icon" href="assets/mascot.png">
     <link rel="stylesheet" href="style.css">
@@ -26,10 +26,10 @@
 
             <div class="drag-bar"></div>
 
-            <h1 class="title"><i class="ri-login-circle-line"></i> Login - account</h1>
-            <p class="subtitle">Enter your email below to login your account</p>
+            <h1 class="title"><i class="ri-login-circle-line"></i>Sign up - account</h1>
+            <p class="subtitle">Enter your email below to create your account</p>
 
-            <form action="api/login.php" method="POST">
+            <form action="api/signup.php" method="POST">
 
                 <div class="input-group">
                     <i class="ri-mail-line input-icon"></i>
@@ -41,15 +41,9 @@
                     <input type="password" placeholder="Password" id="password" name="password" required>
                 </div>
 
-                <a href="#" class="forgot">Forgot Password</a>
+                <a href="index.html" class="forgot">have account?</a>
 
-                <div>
-                    <button class="btn-login" type="submit">Login</button>
-                </div>
-                
-                <button class="btn-login" type="button" onclick="window.location.href='signup.html'">
-                    Sign up
-                </button>
+                <button type="submit" class="btn-login">Sign up</button>
 
             </form>
         </div>
