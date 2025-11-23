@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# ซ่อน .php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]
+Options +FollowSymLinks
+
+Options +FollowSymLinks
+RewriteEngine On
+
+# ถ้าเป็น URL /restaurant/123 → ให้ชี้ไปที่ restaurant.php?id=123
+RewriteRule ^restaurant/([0-9]+)$ restaurant.php?id=$1 [L,QSA]
+
+# ถ้าเป็น URL /restaurant/123/review → ชี้ไป review.php?id=123
+RewriteRule ^restaurant/([0-9]+)/review$ restaurant/review.php?id=$1 [L,QSA]
+
+# ถ้าเป็น URL /restaurant → ชี้ไป restaurant.php
+RewriteRule ^restaurant$ restaurant.php [L]

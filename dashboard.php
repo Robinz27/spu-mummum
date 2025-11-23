@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 
@@ -35,12 +35,12 @@ $user = $_SESSION['user'];
     </div>
 
     <div class="menu-wrapper">
-        <a href="restaurant.php" class="menu-card">
+        <a href="restaurants" class="menu-card">
             <i class="ri-restaurant-line"></i>
             <p class="dashboard-p">ร้านอาหาร</p>
         </a>
 
-        <a href="popular.html" class="menu-card">
+        <a href="popular" class="menu-card">
             <i class="ri-award-line"></i>
             <p class="dashboard-p">ยอดนิยม</p>
         </a>
@@ -48,7 +48,7 @@ $user = $_SESSION['user'];
 
     <div class="big-box"></div>
 
-    <a href="api/logout.php" style="margin:20px; display:block; text-align:center;">Logout</a>
+    <a href="api/logout" style="margin:20px; display:block; text-align:center;">Logout</a>
 
 </body>
 </html>

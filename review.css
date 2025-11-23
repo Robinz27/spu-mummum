@@ -1,0 +1,264 @@
+/* Review Page Styles - ไม่แตะของเดิม */
+.review-header {
+    background: #cf8f4f;
+    border-radius: 0 0 60px 60px;
+    padding: 20px 20px 30px;
+    margin-bottom: 20px;
+}
+
+.review-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.review-title {
+    color: #fff;
+}
+
+.review-title h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.review-title p {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.review-avatar {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.review-avatar img {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.review-avatar-circle {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.review-back-btn {
+    background: #fff;
+    color: #cf8f4f;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: 0.25s;
+    margin-top: 10px;
+}
+
+.review-back-btn:hover {
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+.review-back-btn i {
+    font-size: 16px;
+}
+
+.review-button-pill {
+    background: #fff;
+    color: #333;
+    padding: 12px 0;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 20px 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.review-list {
+    padding: 0 20px;
+}
+
+.review-item {
+    background: #fff;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.review-user {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.review-stars {
+    margin-bottom: 10px;
+}
+
+.review-stars i {
+    color: #ffcc33;
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+.review-stars i.empty {
+    color: #ddd;
+}
+
+.review-comment {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.review-date {
+    font-size: 13px;
+    color: #999;
+    text-align: right;
+}
+
+/* Review Popup Styles */
+.review-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-popup-overlay.active {
+    display: flex;
+}
+
+.review-popup {
+    background: #fff;
+    border-radius: 30px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.review-popup-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.review-popup-header h3 {
+    font-size: 22px;
+    color: #cf8f4f;
+    margin-bottom: 5px;
+}
+
+.review-popup-header p {
+    font-size: 14px;
+    color: #777;
+}
+
+.review-form-group {
+    margin-bottom: 20px;
+}
+
+.review-form-label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.review-star-input {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.review-star-input i {
+    font-size: 32px;
+    color: #ddd;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.review-star-input i.active {
+    color: #ffcc33;
+}
+
+.review-star-input i:hover {
+    transform: scale(1.1);
+}
+
+.review-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    font-size: 15px;
+    font-family: "Kanit", sans-serif;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.review-textarea:focus {
+    outline: none;
+    border-color: #cf8f4f;
+}
+
+.review-popup-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.review-submit-btn,
+.review-cancel-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.review-submit-btn {
+    background: #cf8f4f;
+    color: #fff;
+}
+
+.review-submit-btn:hover {
+    background: #b87d42;
+    transform: scale(1.02);
+}
+
+.review-cancel-btn {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.review-cancel-btn:hover {
+    background: #e0e0e0;
+}

@@ -46,7 +46,7 @@
                     <input type="password" placeholder="Password" id="password" name="password" required>
                 </div>
 
-                <a href="index.html" class="forgot">have account?</a>
+                <a href="../" class="forgot">have account?</a>
 
                 <button type="submit" class="btn-login">Sign up</button>
 

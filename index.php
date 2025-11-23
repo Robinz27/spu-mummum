@@ -29,7 +29,7 @@
             <h1 class="title"><i class="ri-login-circle-line"></i> Login - account</h1>
             <p class="subtitle">Enter your email below to login your account</p>
 
-            <form action="api/login.php" method="POST">
+            <form action="api/login" method="POST">
 
                 <div class="input-group">
                     <i class="ri-mail-line input-icon"></i>
@@ -41,13 +41,13 @@
                     <input type="password" placeholder="Password" id="password" name="password" required>
                 </div>
 
-                <a href="#" class="forgot">Forgot Password</a>
+                <a href="" class="forgot">Forgot Password</a>
 
                 <div>
                     <button class="btn-login" type="submit">Login</button>
                 </div>
                 
-                <button class="btn-login" type="button" onclick="window.location.href='signup.html'">
+                <button class="btn-login" type="button" onclick="window.location.href='signup'">
                     Sign up
                 </button>
 

@@ -21,7 +21,7 @@ if (mysqli_num_rows($query) == 1) {
             "username" => $user['username']
         ];
 
-        header("Location: ../dashboard.php");
+        header("Location: ../dashboard");
         exit;
         
     } else {

@@ -25,7 +25,7 @@ $query = mysqli_query($conn, "SELECT * FROM restaurants ORDER BY id DESC");
     <div class="dashboard-text">
         <h2>ร้านอาหารทั้งหมด</h2>
         <p>เลือกเมนูที่ต้องการ ></p>
-    <button class="back-btn" onclick="window.location.href='dashboard.php'">
+    <button class="back-btn" onclick="window.location.href='dashboard'">
         <i class="ri-arrow-left-line"></i> back
     </button>
     </div>
@@ -59,7 +59,7 @@ $query = mysqli_query($conn, "SELECT * FROM restaurants ORDER BY id DESC");
             </div>
 
             <button class="more-btn" 
-                    onclick="window.location.href='restaurant/detail.php?id=<?= $row['id'] ?>'">
+                    onclick="window.location.href='restaurant/<?= $row['id'] ?>'">
                 more info
             </button>
 

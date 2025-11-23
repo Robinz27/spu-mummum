@@ -26,7 +26,7 @@ if (mysqli_query($conn, $sql)) {
         "username" => $username
     ];
 
-    header("Location: ../dashboard.php");
+    header("Location: ../dashboard");
     exit();
 
 } else {
