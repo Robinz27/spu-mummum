@@ -29,7 +29,7 @@
             <h1 class="title"><i class="ri-login-circle-line"></i>Sign up - account</h1>
             <p class="subtitle">Enter your email below to create your account</p>
 
-            <form action="api/signup.php" method="POST">
+            <form action="api/signup" method="POST">
 
                 <div class="input-group">
                     <i class="ri-user-line input-icon"></i>

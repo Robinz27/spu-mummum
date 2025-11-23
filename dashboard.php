@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: index.php");
+    header("Location: index");
     exit();
 }
 
@@ -24,7 +24,7 @@ $user = $_SESSION['user'];
 <body>
     <div class="dashboard-header">
         <div class="dashboard-text">
-            <h2>สวัสดี <?php echo $user['username']; ?></h2>
+            <h2><i class="ri-thumb-up-line"></i> สวัสดี <?php echo $user['username']; ?></h2>
             <p>เมนูแนะนำวันนี้! ></p>
         </div>
 

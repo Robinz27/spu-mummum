@@ -14,8 +14,17 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-// ดึงข้อมูลร้าน
-$res = mysqli_query($conn, "SELECT * FROM restaurants WHERE id=$id");
+// ดึงข้อมูลร้านพร้อมคะแนนเฉลี่ยจากรีวิว
+$res = mysqli_query($conn, "
+    SELECT 
+        r.*,
+        COALESCE(AVG(rv.rating), 0) as avg_rating,
+        COUNT(rv.id) as review_count
+    FROM restaurants r
+    LEFT JOIN reviews rv ON r.id = rv.restaurant_id
+    WHERE r.id = $id
+    GROUP BY r.id
+");
 $restaurant = mysqli_fetch_assoc($res);
 
 if (!$restaurant) {
@@ -23,9 +32,8 @@ if (!$restaurant) {
 }
 
 $reviews_query = mysqli_query($conn, "SELECT * FROM reviews WHERE restaurant_id=$id ORDER BY created_at DESC");
-$review_count = mysqli_num_rows($reviews_query);
+$review_count = $restaurant['review_count'];
 
-// ฟังก์ชันเบลอชื่อ
 function blurName($name) {
     $name_length = mb_strlen($name);
     if ($name_length <= 2) {
@@ -42,7 +50,7 @@ function blurName($name) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รีวิว - <?= $restaurant['name'] ?></title>
+    <title>SPU MUM-MUM - Review <?= $restaurant['name'] ?></title>
     <link rel="icon" type="image/x-icon" href="../../assets/mascot.png">
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="../../review.css">
@@ -77,12 +85,38 @@ function blurName($name) {
             font-size: 16px;
             color: #999;
         }
+
+        /* เพิ่ม style สำหรับคะแนน */
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating-number {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+            margin-left: 4px;
+        }
+
+        .ri-star-line {
+            color: #ddd;
+        }
+
+        .rating-display .ri-star-fill {
+            color: #ffcc33;
+        }
+
+        .rating-display .ri-star-line {
+            color: #ddd;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard-header">
         <div class="dashboard-text">
-            <h2>รีวิวของร้าน <?= $restaurant['name'] ?></h2>
+            <h2><i class="ri-chat-1-line"></i> รีวิวของทางร้าน</h2>
             <p>ที่นี่จะแสดงรายการรีวิว ></p>
         <button class="back-btn"
             onclick="window.location.href='../<?= $id ?>'">
@@ -100,17 +134,30 @@ function blurName($name) {
         <div class="food-card">
             <img src="../../uploads/<?= $restaurant['image'] ?>" class="header-img">
             <div class="info">
-                <h2 class="food-name"><?= $restaurant['name'] ?></h2>
-                <p><?= $restaurant['type'] ?></p>
-                    <div class="rating">
+                <div class="food-name"><?= $restaurant['name'] ?></div>
+                <div class="food-type"><?= $restaurant['type'] ?></div>
+                    <div class="rating-display">
                         <?php 
-                            for ($i=1; $i <= $restaurant['rating']; $i++) {
-                                echo "<i class='ri-star-fill'></i>";
+                            // ใช้คะแนนเฉลี่ยจากรีวิวจริง
+                            $avg_rating = round($restaurant['avg_rating']);
+                            $exact_rating = number_format($restaurant['avg_rating'], 1);
+                            
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= $avg_rating) {
+                                    echo '<i class="ri-star-fill"></i>';
+                                } else {
+                                    echo '<i class="ri-star-line"></i>';
+                                }
                             }
                         ?>
+                        <?php if ($review_count > 0): ?>
+                            <span class="rating-number">(<?= $exact_rating ?>)</span>
+                        <?php else: ?>
+                            <span class="rating-number">(ยังไม่มีรีวิว)</span>
+                        <?php endif; ?>
                     </div>
                 <button class="more-btn" onclick="openReviewPopup()">
-                    review
+                    <i class="ri-quill-pen-line"></i> review
                 </button>
             </div>
         </div>
@@ -148,15 +195,15 @@ function blurName($name) {
                     </div>
                 </div>
             <?php endwhile; ?>
+        <?php else: ?>
+            <!-- แสดงเมื่อยังไม่มีรีวิว -->
+            <div class="review-empty">
+                <i class="ri-chat-3-line"></i>
+                <h3>ยังไม่มีรีวิวสำหรับร้านนี้</h3>
+                <p>เป็นคนแรกที่เขียนรีวิวให้ร้านนี้สิ!</p>
+            </div>
+        <?php endif; ?>
     </div>
-    <?php else: ?>
-        <!-- แสดงเมื่อยังไม่มีรีวิว -->
-        <div class="review-empty">
-            <i class="ri-chat-3-line"></i>
-            <h3>ยังไม่มีรีวิวสำหรับร้านนี้</h3>
-            <p>เป็นคนแรกที่เขียนรีวิวให้ร้านนี้สิ!</p>
-        </div>
-    <?php endif; ?>
 
     <!-- Review Popup -->
     <div class="review-popup-overlay" id="reviewPopup">

@@ -1,7 +1,17 @@
 <?php
 include "api/db.php";
 
-$query = mysqli_query($conn, "SELECT * FROM restaurants ORDER BY id DESC");
+// Query ร้านอาหารพร้อมคะแนนเฉลี่ยจากรีวิวจริง
+$query = mysqli_query($conn, "
+    SELECT 
+        r.*,
+        COALESCE(AVG(rv.rating), 0) as avg_rating,
+        COUNT(rv.id) as review_count
+    FROM restaurants r
+    LEFT JOIN reviews rv ON r.id = rv.restaurant_id
+    GROUP BY r.id
+    ORDER BY r.id DESC
+");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,12 +28,38 @@ $query = mysqli_query($conn, "SELECT * FROM restaurants ORDER BY id DESC");
 
     <!-- Remix Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <style>
+        /* เพิ่ม style สำหรับแสดงคะแนน */
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .rating-number {
+            margin-left: 6px;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .review-count {
+            font-size: 12px;
+            color: #999;
+            margin-left: 4px;
+        }
+        
+        .ri-star-line {
+            color: #ddd;
+        }
+    </style>
 </head>
 <body>
 
 <div class="dashboard-header">
     <div class="dashboard-text">
-        <h2>ร้านอาหารทั้งหมด</h2>
+        <h2><i class="ri-restaurant-2-line"></i> ร้านอาหารทั้งหมด</h2>
         <p>เลือกเมนูที่ต้องการ ></p>
     <button class="back-btn" onclick="window.location.href='dashboard'">
         <i class="ri-arrow-left-line"></i> back
@@ -50,17 +86,30 @@ $query = mysqli_query($conn, "SELECT * FROM restaurants ORDER BY id DESC");
 
             <div class="rating">
                 <?php 
+                    // ใช้คะแนนเฉลี่ยจากรีวิวจริง
+                    $avg_rating = round($row['avg_rating']); // ปัดเศษเป็นเลขเต็ม
+                    $exact_rating = number_format($row['avg_rating'], 1); // คะแนนแบบทศนิยม
+                    
+                    // แสดงดาว
                     for ($i = 1; $i <= 5; $i++) {
-                        echo ($i <= $row['rating']) 
+                        echo ($i <= $avg_rating) 
                             ? "<i class='ri-star-fill'></i>" 
                             : "<i class='ri-star-line'></i>";
                     }
                 ?>
+                
+                <!-- แสดงคะแนนตัวเลข -->
+                <?php if ($row['review_count'] > 0): ?>
+                    <span class="rating-number">(<?= $exact_rating ?>)</span>
+                    <span class="review-count"><?= $row['review_count'] ?> รีวิว</span>
+                <?php else: ?>
+                    <span class="rating-number">(ยังไม่มีรีวิว)</span>
+                <?php endif; ?>
             </div>
 
             <button class="more-btn" 
                     onclick="window.location.href='restaurant/<?= $row['id'] ?>'">
-                more info
+                <i class="ri-information-line"></i> more info
             </button>
 
         </div>

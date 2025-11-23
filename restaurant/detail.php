@@ -7,8 +7,17 @@ if (!isset($_GET['id'])) {
 
 $restaurant_id = $_GET['id'];
 
-// ดึงข้อมูลร้าน
-$res = mysqli_query($conn, "SELECT * FROM restaurants WHERE id = $restaurant_id");
+// ดึงข้อมูลร้านพร้อมคะแนนเฉลี่ยจากรีวิว
+$res = mysqli_query($conn, "
+    SELECT 
+        r.*,
+        COALESCE(AVG(rv.rating), 0) as avg_rating,
+        COUNT(rv.id) as review_count
+    FROM restaurants r
+    LEFT JOIN reviews rv ON r.id = rv.restaurant_id
+    WHERE r.id = $restaurant_id
+    GROUP BY r.id
+");
 $restaurant = mysqli_fetch_assoc($res);
 
 if (!$restaurant) {
@@ -24,7 +33,7 @@ $menu_count = mysqli_num_rows($menu_query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPU MUM-MUM -<?= $restaurant['name'] ?></title>
+    <title>SPU MUM-MUM - <?= $restaurant['name'] ?></title>
     <link rel="icon" type="image/x-icon" href="../assets/mascot.png">
     <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -58,13 +67,35 @@ $menu_count = mysqli_num_rows($menu_query);
             font-size: 16px;
             color: #999;
         }
+
+        /* เพิ่ม style สำหรับคะแนน */
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating-display .ri-star-fill {
+            color: #ffcc33;
+        }
+
+        .rating-display .ri-star-line {
+            color: #ddd;
+        }
+
+        .rating-number {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+            margin-left: 4px;
+        }
     </style>
 </head>
 <body>
 
 <div class="dashboard-header">
     <div class="dashboard-text">
-        <h2>เมนูอาหารของ <?= $restaurant['name'] ?></h2>
+        <h2><i class="ri-restaurant-line"></i> เมนูอาหารของทางร้าน</h2>
         <p>เลือกเมนูที่ต้องการ ></p>
     <button class="back-btn" onclick="window.location.href='../restaurants'">
         <i class="ri-arrow-left-line"></i> back
@@ -81,17 +112,30 @@ $menu_count = mysqli_num_rows($menu_query);
     <div class="food-card">
         <img src="../uploads/<?= $restaurant['image'] ?>" class="header-img">
         <div class="info">
-            <h2 class="food-name"><?= $restaurant['name'] ?></h2>
-            <p><?= $restaurant['type'] ?></p>
-                <div class="rating">
+            <div class="food-name"><?= $restaurant['name'] ?></div>
+            <div class="food-type"><?= $restaurant['type'] ?></div>
+                <div class="rating-display">
                     <?php 
-                        for ($i=1; $i <= $restaurant['rating']; $i++) {
-                            echo "<i class='ri-star-fill'></i>";
+                        // ใช้คะแนนเฉลี่ยจากรีวิวจริง
+                        $avg_rating = round($restaurant['avg_rating']);
+                        $exact_rating = number_format($restaurant['avg_rating'], 1);
+                        
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= $avg_rating) {
+                                echo '<i class="ri-star-fill"></i>';
+                            } else {
+                                echo '<i class="ri-star-line"></i>';
+                            }
                         }
                     ?>
+                    <?php if ($restaurant['review_count'] > 0): ?>
+                        <span class="rating-number">(<?= $exact_rating ?>)</span>
+                    <?php else: ?>
+                        <span class="rating-number">(ยังไม่มีรีวิว)</span>
+                    <?php endif; ?>
                 </div>
             <button class="more-btn" onclick="window.location.href='<?= $restaurant_id ?>/review'">
-        review
+        <i class="ri-quill-pen-line"></i> review
     </button>
         </div>
     </div>
